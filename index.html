@@ -1448,7 +1448,7 @@ html[lang="zh-CN"] .vcap .cn { font-weight: 500; line-height: 1.5; }
     var k = TABS.map(function (t) { return t.id; }).indexOf((location.hash || "").slice(1));
     if (k >= 0 && k !== st.cur) { st.view = "app"; if (!st.machine) st.machine = "dry"; st.max = Math.max(st.max, k); st.cur = k; render(); }
   });
-  if (h) { splash.hidden = true; } else { playSplash(); }
+  if (hi >= 0) { splash.hidden = true; } else { playSplash(); }
   $("#replay").addEventListener("click", playSplash);
 })();
 </script>
