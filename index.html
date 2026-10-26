@@ -193,6 +193,8 @@ html.paged { scroll-behavior: auto; overscroll-behavior: none; }
 #dlg-contact .contact .line .btn { flex: none; }
 #dlg-contact .qr { flex: none; }
 @media (max-width: 640px) { #dlg-contact .contact { flex-direction: column; } #dlg-contact .contact .line { gap: 8px; } #dlg-contact .contact .line .btn { padding: 8px 10px; font-size: 15px; } #dlg-contact .qr { align-self: center; } }
+/* панель гостевой всегда занимает весь экран под шапкой: высота берётся по максимуму из vh, svh и фактической innerHeight (в некоторых окнах svh меньше видимой области и из-под первой панели виднелась вторая) */
+.pg { min-height: calc(max(var(--vh100, 100vh), 100vh, 100svh) - var(--bar)); }
 /* маслозаполненная машина: функция строится — за плашкой ничего нет (раньше сквозь размытие угадывались графики) */
 #tabwrap.blocked > section.tab { visibility: hidden; }
 .vstage { position: absolute; inset: 0; cursor: pointer; }
@@ -2051,6 +2053,7 @@ html[lang="zh-CN"] .vcap .cn { font-weight: 500; line-height: 1.5; }
 (function () {
   var v = document.getElementById("vp-video"), box = document.getElementById("vp-box"); if (!v || !box) return;
   var $ = function (i) { return document.getElementById(i); };
+  function vh100() { document.documentElement.style.setProperty("--vh100", window.innerHeight + "px"); } vh100(); window.addEventListener("resize", vh100);
   var SRC = { ru: "video/pfya_ru.mp4", en: "video/pfya_en.mp4", zh: "video/pfya_zh.mp4" }, DL = { ru: "PFYA_video_RU.mp4", en: "PFYA_video_EN.mp4", zh: "PFYA_video_ZH.mp4" };
   var seek = $("vp-seek"), fill = $("vp-fill"), knob = $("vp-knob"), vol = $("vp-vol"), vfill = $("vp-vfill"), vknob = $("vp-vknob"), cur = $("vp-cur"), dur = $("vp-dur");
   var cl = function (x) { return Math.min(1, Math.max(0, x)); };
